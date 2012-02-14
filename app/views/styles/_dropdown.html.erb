@@ -1,0 +1,17 @@
+<div class="btn-group">
+	<a class="btn color-label">
+		<span class='selected-color' style="background-color:<%= colors[index] %>;"></span> 
+		<span class='selected-value'><%= colors[index] %></span>
+	</a>
+	<a href='#' class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+	<ul class='dropdown-menu'>
+		<% colors.each do |color| %>
+			<li>
+				<a href='#' class='select-color' data-index="<%= index %>">
+					<span style="display:inline-block;width:20px;height:15px;background-color:<%= color %>;"></span>
+					<span class='value'><%= color%></span>
+				</a>
+			</li>
+		<% end %>
+	</ul>
+</div>

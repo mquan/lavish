@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lavish - Generate your own Bootstrap color scheme</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <style id='lavish-style' type="text/css">
+	<%= yield :boostrap_style %>
+  </style>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Lavish</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+	  <%= yield %>
+	
+	  <% sample1 = "http://a6.sphotos.ak.fbcdn.net/hphotos-ak-ash4/71568_446185306986_694716986_5762773_6191462_n.jpg" %>
+	  <% sample2 = "http://a3.sphotos.ak.fbcdn.net/hphotos-ak-ash4/74077_449191816986_694716986_5807676_4551709_n.jpg" %>
+	  <% sample3 = "http://sphotos.xx.fbcdn.net/hphotos-ash4/72593_446198446986_694716986_5762959_6488960_n.jpg" %>
+      <div class="row">
+		<div class='span12'><h2>Want more samples?</h2></div>
+        <div class="span4">
+			<%= image_tag(sample1)%>
+           	<a class="btn" href="/?image_url=<%= sample1 %>">Use this &raquo;</a></p>
+        </div>
+        <div class="span4">
+	        <div class="span4">
+				<%= image_tag(sample2)%>
+	           	<a class="btn" href="/?image_url=<%= sample2 %>">Use this &raquo;</a></p>
+	        </div>
+       </div>
+        <div class="span4">
+	        <div class="span4">
+				<%= image_tag(sample3)%>
+	           	<a class="btn" href="/?image_url=<%= sample3 %>">Use this &raquo;</a></p>
+	        </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>;-) A side project by Quan</p>
+      </footer>
+
+    </div> <!-- /container -->
+  </body>
+</html>
