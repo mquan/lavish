@@ -5,9 +5,10 @@ gem 'rails', '3.2.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+#gem 'sqlite3'
+gem 'pg', :group => :production
 gem "less", "~> 2.0.9"
-#gem "rmagick", :require => 'RMagick'
+gem "rmagick", :require => 'RMagick'
 gem "prizm"
 
 # Gems used only for assets and not required
