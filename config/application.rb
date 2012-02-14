@@ -56,9 +56,8 @@ module Lavish
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
-    #this concatenation should be done in a rake file
-    #see if I can just compile the bootstrap file (probably not b/c the default root would be config dir)
-    
+    config.middleware.use "UseWWW" if Rails.env.production?
+        
     bootstrap = ''
     names = ['reset', 'mixins', 'scaffolding', 'grid', 'layouts', 'type', 'code', 'forms', 'tables',
       'sprites', 'dropdowns', 'wells', 'component-animations', 'close', 'buttons', 'button-groups', 'alerts',
