@@ -6,7 +6,6 @@ gem 'rails', '3.2.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
-gem 'pg', :group => :production
 gem "less", "~> 2.0.9"
 gem "rmagick", :require => 'RMagick'
 gem "prizm"
