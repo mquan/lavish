@@ -14,6 +14,7 @@ class StylesController < ApplicationController
       else
         extr = Prizm::Extractor.new(@url)
         @colors = extr.get_colors(8, false).map { |p| extr.to_hex(p) }
+        extr = nil
       end
     end
     set_style
