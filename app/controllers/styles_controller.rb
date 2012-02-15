@@ -22,7 +22,7 @@ class StylesController < ApplicationController
   end
   
   def customize
-    @colors = params[:colors]
+    @colors = params[:colors][0..5].push(params[:colors][7], params[:colors][6])
     set_style
   end
   
