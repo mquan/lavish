@@ -1,12 +1,20 @@
 class StylesController < ApplicationController
   def set
-    if params[:image_url]
-      @url = params[:image_url] #||"http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
-      extr = Prizm::Extractor.new(@url)
-      @colors = extr.get_colors(8, false).map { |p| extr.to_hex(p) }
-    else
+    if !params[:image_url]
       @url = "http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
       @colors = ['#DFE2E7', '#9D8C73', '#B0A48E', '#8A765C', '#73604B', '#CABEA7', '#604C36', '#3B2919']
+    else
+      @url = params[:image_url] #||"http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
+      if params[:image_url] == "http://farm3.staticflickr.com/2727/4394310695_3792c55ff8.jpg"
+        @colors = ['#FCF8FA', '#DBAABD', '#EB6D91', '#EA98AA', '#553F45', '#C5556B', '#A47487', '#BD827B']
+      elsif params[:image_url] == "http://farm2.staticflickr.com/1294/4681600020_5ef3116077.jpg"
+        @colors = ['#A0A1A3','#BEBFC0', '#8B7B70', '#66748A', '#353332', '#788697', '#5F5F64', '#D6D5D4']
+      elsif params[:image_url] == "http://farm6.staticflickr.com/5064/5896103449_fa2c7a168d.jpg"
+        @colors = ['#12191F','#555347', '#A7673F', '#C99B57', '#ECE0DD', '#A7A894', '#D4BEA1', '#6F8F85']
+      else
+        extr = Prizm::Extractor.new(@url)
+        @colors = extr.get_colors(8, false).map { |p| extr.to_hex(p) }
+      end
     end
     set_style
   end
