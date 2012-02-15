@@ -37,11 +37,11 @@ class StylesController < ApplicationController
 // --------------------------------------------------
 
 // Links
-@linkColor:             #{@colors[7]};
+@linkColor:             #{@colors[6]};
 @linkColorHover:        darken(@linkColor, 15%);
 
 // Grays
-@black:                 #{@colors[6]};
+@black:                 #{@colors[7]};
 @grayDarker:            #{@colors[5]};
 @grayDark:              #{@colors[4]};
 @gray:                  #{@colors[3]};
