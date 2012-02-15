@@ -1,8 +1,13 @@
 class StylesController < ApplicationController
   def set
-    @url = params[:image_url] ||"http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
-    extr = Prizm::Extractor.new(@url)
-    @colors = extr.get_colors(8, false).map { |p| extr.to_hex(p) }
+    if params[:image_url]
+      @url = params[:image_url] #||"http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
+      extr = Prizm::Extractor.new(@url)
+      @colors = extr.get_colors(8, false).map { |p| extr.to_hex(p) }
+    else
+      @url = "http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
+      @colors = ['#DFE2E7', '#9D8C73', '#B0A48E', '#8A765C', '#73604B', '#CABEA7', '#604C36', '#3B2919']
+    end
     set_style
   end
   
