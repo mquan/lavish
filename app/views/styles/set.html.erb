@@ -30,7 +30,7 @@
 			<table class='table table-bordered'>
 				<% @colors.each_with_index do |color, index| %>
 					<tr>
-						<td><%= @elements[index]%></td>
+						<td><%= Lavish::Application::ELEMENTS[index]%></td>
 						<td style="text-align:center;"><%= render :partial => 'dropdown', :locals => { :colors => @colors, :index => index } %></td>
 						<td style="text-align:center;"><%= text_field_tag "colors[]", color, {:class => 'color-input', :style => 'width:88px;', 'data-index' => index } %></td>
 					</tr>

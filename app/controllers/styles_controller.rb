@@ -4,12 +4,12 @@ class StylesController < ApplicationController
       @url = "http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
       @colors = ['#DFE2E7', '#9D8C73', '#B0A48E', '#8A765C', '#73604B', '#CABEA7', '#604C36', '#3B2919']
     else
-      @url = params[:image_url] #||"http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
-      if params[:image_url] == "http://farm3.staticflickr.com/2727/4394310695_3792c55ff8.jpg"
+      @url = params[:image_url]
+      if @url == "http://farm3.staticflickr.com/2727/4394310695_3792c55ff8.jpg"
         @colors = ['#FCF8FA', '#DBAABD', '#EB6D91', '#EA98AA', '#553F45', '#C5556B', '#A47487', '#BD827B']
-      elsif params[:image_url] == "http://farm2.staticflickr.com/1294/4681600020_5ef3116077.jpg"
+      elsif @url == "http://farm2.staticflickr.com/1294/4681600020_5ef3116077.jpg"
         @colors = ['#A0A1A3','#BEBFC0', '#8B7B70', '#66748A', '#353332', '#788697', '#5F5F64', '#D6D5D4']
-      elsif params[:image_url] == "http://farm6.staticflickr.com/5064/5896103449_fa2c7a168d.jpg"
+      elsif @url == "http://farm6.staticflickr.com/5064/5896103449_fa2c7a168d.jpg"
         @colors = ['#12191F','#555347', '#A7673F', '#C99B57', '#ECE0DD', '#A7A894', '#D4BEA1', '#6F8F85']
       else
         extr = Prizm::Extractor.new(@url)
@@ -27,16 +27,6 @@ class StylesController < ApplicationController
   
   private
   def set_style
-    @elements = [
-      'background, link color hover', 
-      'nav background hover, nav tabs borders', 
-      'navbar link color, placeholder text', 
-      'link color within dropdown', 
-      'text color, btn text color, navbar background',
-      'navbar background highlight',
-      'modal backdrop & tooltip & popover background',
-      'link color, primary button background'
-    ]
     variables = %{
 // Variables.less
 // Variables to customize the look and feel of Bootstrap
@@ -135,5 +125,6 @@ class StylesController < ApplicationController
     }
     @less = variables + Lavish::Application::BOOTSTRAP
     @css = Lavish::Application::PARSER.parse(@less).to_css
+    variables = nil
   end
 end

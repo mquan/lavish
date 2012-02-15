@@ -70,5 +70,15 @@ module Lavish
     
     BOOTSTRAP = bootstrap
     PARSER = Less::Parser.new
+    ELEMENTS = [
+      'background, link color hover', 
+      'nav background hover, nav tabs borders', 
+      'navbar link color, placeholder text', 
+      'link color within dropdown', 
+      'text color, btn text color, navbar background',
+      'navbar background highlight',
+      'modal backdrop & tooltip & popover background',
+      'link color, primary button background'
+    ]
   end
 end
