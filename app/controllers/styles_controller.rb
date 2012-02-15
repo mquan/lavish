@@ -6,14 +6,15 @@ class StylesController < ApplicationController
     else
       @url = params[:image_url]
       if @url == "http://farm3.staticflickr.com/2727/4394310695_3792c55ff8.jpg"
-        @colors = ['#FCF8FA', '#DBAABD', '#EB6D91', '#EA98AA', '#553F45', '#C5556B', '#A47487', '#BD827B']
-      elsif @url == "http://farm2.staticflickr.com/1294/4681600020_5ef3116077.jpg"
-        @colors = ['#A0A1A3','#BEBFC0', '#8B7B70', '#66748A', '#353332', '#788697', '#5F5F64', '#D6D5D4']
-      elsif @url == "http://farm6.staticflickr.com/5064/5896103449_fa2c7a168d.jpg"
-        @colors = ['#12191F','#555347', '#A7673F', '#C99B57', '#ECE0DD', '#A7A894', '#D4BEA1', '#6F8F85']
+        @colors = ["#FCF8FA", "#DBAABD", "#EA98AA", "#EB6D91", "#BD827B", "#C5556B", "#A47487", "#553F45"]
+      elsif @url == "http://farm7.staticflickr.com/6205/6038176125_903a69effe.jpg"
+        @colors = ["#DCD8D5", "#C2BFBC", "#A09F9B", "#778890", "#84837D", "#737B80", "#5C6263", "#2C373D"]
+      elsif @url == "http://farm2.staticflickr.com/1156/5104802230_103b475358.jpg"
+        @colors = ["#E1D9D6", "#CCC4C4", "#B7B6C7", "#C9AFA9", "#A49BAC", "#8A7C92", "#91676F", "#4B3939"]
       else
         extr = Prizm::Extractor.new(@url)
-        @colors = extr.get_colors(8, false).map { |p| extr.to_hex(p) }
+        #@colors = extr.get_colors(8, false).map { |p| extr.to_hex(p) }
+        @colors = extr.get_colors(8, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
         extr = nil
       end
     end
