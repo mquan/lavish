@@ -1,6 +1,8 @@
 Lavish::Application.routes.draw do
   root :to => 'styles#set'
   match '/customize' => 'styles#customize', :as => :customize
+  match '/restart' => 'styles#restart', :as => :restart
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

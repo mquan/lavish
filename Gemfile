@@ -7,10 +7,12 @@ gem 'rails', '3.2.0'
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'oink'
 end
 group :production do
   gem 'pg'
 end
+gem "heroku"
 gem "less", "~> 2.0.9"
 gem "rmagick", :require => 'RMagick'
 gem "prizm"

@@ -13,7 +13,6 @@ class StylesController < ApplicationController
         @colors = ["#E1D9D6", "#CCC4C4", "#B7B6C7", "#C9AFA9", "#A49BAC", "#8A7C92", "#91676F", "#4B3939"]
       else
         extr = Prizm::Extractor.new(@url)
-        #@colors = extr.get_colors(8, false).map { |p| extr.to_hex(p) }
         @colors = extr.get_colors(8, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
         extr = nil
       end
@@ -24,6 +23,10 @@ class StylesController < ApplicationController
   def customize
     @colors = params[:colors][0..5].push(params[:colors][7], params[:colors][6])
     set_style
+  end
+  
+  def restart
+    Lavish::Application::HEROKU.ps_restart("lavish")
   end
   
   private
@@ -124,8 +127,14 @@ class StylesController < ApplicationController
 @fluidGridGutterWidth:    2.127659574%;
       
     }
+    
+    if Rails.env.production? && Lavish::Application::STARTTIME < 30.minutes.ago #restart every 30 mins
+      Lavish::Application::HEROKU.ps_restart("lavish")
+    end
     @less = variables + Lavish::Application::BOOTSTRAP
-    @css = Lavish::Application::PARSER.parse(@less).to_css
+    tree = Lavish::Application::PARSER.parse(@less) #this here causes the memory leak
+    @css = tree.to_css
+    tree = nil
     variables = nil
   end
 end
