@@ -26,7 +26,12 @@ class StylesController < ApplicationController
   end
   
   def restart
-    Lavish::Application::HEROKU.ps_restart("lavish")
+    #Lavish::Application::HEROKU.ps_restart("lavish")
+    h = Heroku::Client.new("mquannie@gmail.com", "quan1983")
+    h.ps_restart("lavish")
+    respond_to do |format|
+      format.html { render 'set' }
+    end
   end
   
   private
@@ -128,9 +133,9 @@ class StylesController < ApplicationController
       
     }
     
-    if Rails.env.production? && Lavish::Application::STARTTIME < 30.minutes.ago #restart every 30 mins
-      Lavish::Application::HEROKU.ps_restart("lavish")
-    end
+    #if Rails.env.production? && Lavish::Application::STARTTIME < 30.minutes.ago #restart every 30 mins
+    #  Lavish::Application::HEROKU.ps_restart("lavish")
+    #end
     @less = variables + Lavish::Application::BOOTSTRAP
     tree = Lavish::Application::PARSER.parse(@less) #this here causes the memory leak
     @css = tree.to_css
