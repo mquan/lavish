@@ -3,6 +3,6 @@
 A Rails app that generates Bootstrap color scheme from an image. Here's a demo
 link:http://www.lavishbootstrap.com
 
-The heavy lifting of extracting colors out of an images is done by the prizm gem link:https://github.com/mquan/lavish
+The heavy lifting of extracting colors out of an images is done by the prizm gem link:http://github.com/mquan/prizm
 
 MIT License
