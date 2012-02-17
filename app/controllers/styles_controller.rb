@@ -2,12 +2,12 @@ class StylesController < ApplicationController
   def set
     @url = params[:image_url] ||"http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
     extr = Prizm::Extractor.new(@url)
-    @colors = extr.get_colors(8, false).map { |p| extr.to_hex(p) }
+    @colors = extr.get_colors(8, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
     set_style
   end
   
   def customize
-    @colors = params[:colors]
+    @colors = params[:colors][0..5].push(params[:colors][7], params[:colors][6])
     set_style
   end
   
@@ -32,11 +32,11 @@ class StylesController < ApplicationController
 // --------------------------------------------------
 
 // Links
-@linkColor:             #{@colors[7]};
+@linkColor:             #{@colors[6]};
 @linkColorHover:        darken(@linkColor, 15%);
 
 // Grays
-@black:                 #{@colors[6]};
+@black:                 #{@colors[7]};
 @grayDarker:            #{@colors[5]};
 @grayDark:              #{@colors[4]};
 @gray:                  #{@colors[3]};
