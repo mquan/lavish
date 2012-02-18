@@ -1,3 +1,3 @@
-$('#css-code').val("<%=raw escape_javascript(@css) %>");
-$('#less-code').val("<%=raw escape_javascript(@less)%>");
-$('#lavish-style').text("<%=raw escape_javascript(@css) %>");
+var rawless = '<%=raw j @less%>';
+$('#less-code').val(rawless);
+lavish_parse(rawless);

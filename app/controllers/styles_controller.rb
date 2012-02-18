@@ -1,29 +1,20 @@
 class StylesController < ApplicationController
   def set
-    @url = params[:image_url] ||"http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
+    @url = params[:image_url] || "http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
     extr = Prizm::Extractor.new(@url)
-    @colors = extr.get_colors(8, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
+    @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
+    extr = nil
     set_style
   end
   
   def customize
-    @colors = params[:colors][0..5].push(params[:colors][7], params[:colors][6])
+    @colors = params[:colors]
     set_style
   end
   
   private
   def set_style
-    @elements = [
-      'background, link color hover', 
-      'nav background hover, nav tabs borders', 
-      'navbar link color, placeholder text', 
-      'link color within dropdown', 
-      'text color, btn text color, navbar background',
-      'navbar background highlight',
-      'modal backdrop & tooltip & popover background',
-      'link color, primary button background'
-    ]
-    variables = %{
+    @less = %{
 // Variables.less
 // Variables to customize the look and feel of Bootstrap
 // -----------------------------------------------------
@@ -32,13 +23,13 @@ class StylesController < ApplicationController
 // --------------------------------------------------
 
 // Links
-@linkColor:             #{@colors[6]};
+@linkColor:             #{@colors[4]};
 @linkColorHover:        darken(@linkColor, 15%);
 
 // Grays
-@black:                 #{@colors[7]};
-@grayDarker:            #{@colors[5]};
-@grayDark:              #{@colors[4]};
+@black:                 #{@colors[6]};
+@grayDark:              #{@colors[5]}; 
+@grayDarker:            darken(@grayDark, 10%);
 @gray:                  #{@colors[3]};
 @grayLight:             #{@colors[2]};
 @grayLighter:           #{@colors[1]};
@@ -117,9 +108,8 @@ class StylesController < ApplicationController
 // Fluid grid
 @fluidGridColumnWidth:    6.382978723%;
 @fluidGridGutterWidth:    2.127659574%;
-      
+
+#{Lavish::Application::BOOTSTRAP}
     }
-    @less = variables + Lavish::Application::BOOTSTRAP
-    @css = Lavish::Application::PARSER.parse(@less).to_css
   end
 end

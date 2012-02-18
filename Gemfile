@@ -8,7 +8,6 @@ gem 'rails', '3.2.0'
 group :development, :test do
   gem 'sqlite3'
 end
-gem "less", "~> 2.0.9"
 gem "prizm"
 
 # Gems used only for assets and not required
