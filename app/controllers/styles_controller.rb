@@ -2,39 +2,37 @@ class StylesController < ApplicationController
   def set
     if !params[:image_url]
       @url = "http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
-      @colors = ['#DFE2E7', '#9D8C73', '#B0A48E', '#8A765C', '#73604B', '#CABEA7', '#604C36', '#3B2919']
+      @colors = ["#DFE2E7", "#CABEA7", "#B0A48E", "#9D8C73", "#8A765C", "#73604B", "#4D3A27"]
     else
       @url = params[:image_url]
       if @url == "http://farm3.staticflickr.com/2727/4394310695_3792c55ff8.jpg"
-        @colors = ["#FCF8FA", "#DBAABD", "#EA98AA", "#EB6D91", "#BD827B", "#C5556B", "#A47487", "#553F45"]
+        @colors = ["#FCF8FA", "#DBAABD", "#EA98AA", "#E66D90", "#BD827B", "#C5556B", "#553F45"]
       elsif @url == "http://farm7.staticflickr.com/6205/6038176125_903a69effe.jpg"
-        @colors = ["#DCD8D5", "#C2BFBC", "#A09F9B", "#778890", "#84837D", "#737B80", "#5C6263", "#2C373D"]
+        @colors = ["#DCD8D5", "#C2BFBC", "#A09F9B", "#778890", "#7C7F7E", "#5C6263", "#2C373D"]
       elsif @url == "http://farm2.staticflickr.com/1156/5104802230_103b475358.jpg"
-        @colors = ["#E1D9D6", "#CCC4C4", "#B7B6C7", "#C9AFA9", "#A49BAC", "#8A7C92", "#91676F", "#4B3939"]
+        @colors = ["#E1D9D6", "#CCC4C4", "#B7B6C7", "#C9AFA9", "#A49BAC", "#8D7383", "#4B3939"]
       else
         extr = Prizm::Extractor.new(@url)
-        @colors = extr.get_colors(8, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
+        @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
         extr = nil
       end
     end
+    
+    #@url = params[:image_url] || "http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
+    #extr = Prizm::Extractor.new(@url)
+    #@colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
+    #extr = nil
     set_style
   end
   
   def customize
-    @colors = params[:colors][0..5].push(params[:colors][7], params[:colors][6])
+    @colors = params[:colors]
     set_style
-  end
-  
-  def restart
-    Lavish::Application::HEROKU.ps_restart("lavish")
-    respond_to do |format|
-      format.html { render :nothing => true }
-    end
   end
   
   private
   def set_style
-    variables = %{
+    @less = %{
 // Variables.less
 // Variables to customize the look and feel of Bootstrap
 // -----------------------------------------------------
@@ -43,13 +41,13 @@ class StylesController < ApplicationController
 // --------------------------------------------------
 
 // Links
-@linkColor:             #{@colors[6]};
+@linkColor:             #{@colors[4]};
 @linkColorHover:        darken(@linkColor, 15%);
 
 // Grays
-@black:                 #{@colors[7]};
-@grayDarker:            #{@colors[5]};
-@grayDark:              #{@colors[4]};
+@black:                 #{@colors[6]};
+@grayDark:              #{@colors[5]}; 
+@grayDarker:            darken(@grayDark, 10%);
 @gray:                  #{@colors[3]};
 @grayLight:             #{@colors[2]};
 @grayLighter:           #{@colors[1]};
@@ -129,15 +127,7 @@ class StylesController < ApplicationController
 @fluidGridColumnWidth:    6.382978723%;
 @fluidGridGutterWidth:    2.127659574%;
       
+#{Lavish::Application::BOOTSTRAP}
     }
-    
-    if Rails.env.production? && Lavish::Application::STARTTIME < 30.minutes.ago #restart every 30 mins
-      Lavish::Application::HEROKU.ps_restart("lavish")
-    end
-    @less = variables + Lavish::Application::BOOTSTRAP
-    tree = Lavish::Application::PARSER.parse(@less) #this here causes the memory leak
-    @css = tree.to_css
-    tree = nil
-    variables = nil
   end
 end

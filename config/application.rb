@@ -57,9 +57,7 @@ module Lavish
     config.assets.version = '1.0'
     
     config.middleware.use "UseWWW" if Rails.env.production?
-    
-    config.middleware.use(Oink::Middleware, :logger => Rails.logger) if Rails.env.development?
-    
+        
     bootstrap = ''
     names = ['reset', 'mixins', 'scaffolding', 'grid', 'layouts', 'type', 'code', 'forms', 'tables',
       'sprites', 'dropdowns', 'wells', 'component-animations', 'close', 'buttons', 'button-groups', 'alerts',
@@ -71,18 +69,14 @@ module Lavish
     end
     
     BOOTSTRAP = bootstrap
-    PARSER = Less::Parser.new
-    HEROKU = Heroku::Client.new("mquannie@gmail.com", "quan1983")
-    STARTTIME = Time.now
     ELEMENTS = [
       'background, link color hover', 
       'nav background hover, nav tabs borders', 
       'navbar link color, placeholder text', 
-      'link color within dropdown', 
+      'link color within dropdown',
+      'link color, primary button background',
       'text color, btn text color, navbar background',
-      'navbar background highlight',
-      'modal backdrop & tooltip & popover background',
-      'link color, primary button background'
+      'modal backdrop & tooltip & popover background'
     ]
   end
 end

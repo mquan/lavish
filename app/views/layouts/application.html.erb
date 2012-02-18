@@ -4,13 +4,10 @@
   <title>Lavish - Generate your own Bootstrap color scheme</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <style id='lavish-style' type="text/css">
-	<%= yield :boostrap_style %>
-  </style>
+  <style id='lavish-style' type="text/css"></style>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">

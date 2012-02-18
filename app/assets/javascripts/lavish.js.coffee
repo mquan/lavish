@@ -1,4 +1,14 @@
-$(document).ready ->
+window.lavish_parse = (rawless)->
+	parser = new(less.Parser)
+	parser.parse rawless, (err, tree)->
+		if err
+			console.log(err)
+		else
+			css = tree.toCSS()
+			$('#css-code').val(css)
+			$('#lavish-style').text(css)
+			
+$(document).ready ->			
 	$('.select-color').on 'click', ->
 		val = $('.value', this).text()
 		$label = $('.color-label', $(this).closest('.btn-group'))
