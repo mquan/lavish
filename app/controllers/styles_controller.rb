@@ -12,9 +12,13 @@ class StylesController < ApplicationController
       elsif @url == "http://farm2.staticflickr.com/1156/5104802230_103b475358.jpg"
         @colors = ["#E1D9D6", "#CCC4C4", "#B7B6C7", "#C9AFA9", "#A49BAC", "#8D7383", "#4B3939"]
       else
-        extr = Prizm::Extractor.new(@url)
-        @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
-        extr = nil
+        begin
+          extr = Prizm::Extractor.new(@url)
+          @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
+          extr = nil
+        rescue
+          @colors = []
+        end
       end
     end
     
@@ -41,17 +45,17 @@ class StylesController < ApplicationController
 // --------------------------------------------------
 
 // Links
-@linkColor:             #{@colors[4]};
+@linkColor:             #{@colors[4] || '#08c'};
 @linkColorHover:        darken(@linkColor, 15%);
 
 // Grays
-@black:                 #{@colors[6]};
-@grayDark:              #{@colors[5]}; 
+@black:                 #{@colors[6] || '#000'};
+@grayDark:              #{@colors[5] || '##222'}; 
 @grayDarker:            darken(@grayDark, 10%);
-@gray:                  #{@colors[3]};
-@grayLight:             #{@colors[2]};
-@grayLighter:           #{@colors[1]};
-@white:                 #{@colors[0]};
+@gray:                  #{@colors[3] || '#555'};
+@grayLight:             #{@colors[2] || '#999'};
+@grayLighter:           #{@colors[1] || '#eee'};
+@white:                 #{@colors[0] || '#fff'};
 
 // Accent colors
 @blue:                  #049cdb;
