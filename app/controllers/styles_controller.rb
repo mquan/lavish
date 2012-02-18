@@ -1,9 +1,13 @@
 class StylesController < ApplicationController
   def set
     @url = params[:image_url] || "http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
-    extr = Prizm::Extractor.new(@url)
-    @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
-    extr = nil
+    begin
+      extr = Prizm::Extractor.new(@url)
+      @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
+      extr = nil
+    rescue
+      @colors = []
+    end
     set_style
   end
   
@@ -23,17 +27,17 @@ class StylesController < ApplicationController
 // --------------------------------------------------
 
 // Links
-@linkColor:             #{@colors[4]};
+@linkColor:             #{@colors[4] || '#08c'};
 @linkColorHover:        darken(@linkColor, 15%);
 
 // Grays
-@black:                 #{@colors[6]};
-@grayDark:              #{@colors[5]}; 
+@black:                 #{@colors[6] || '#000'};
+@grayDark:              #{@colors[5] || '##222'}; 
 @grayDarker:            darken(@grayDark, 10%);
-@gray:                  #{@colors[3]};
-@grayLight:             #{@colors[2]};
-@grayLighter:           #{@colors[1]};
-@white:                 #{@colors[0]};
+@gray:                  #{@colors[3] || '#555'};
+@grayLight:             #{@colors[2] || '#999'};
+@grayLighter:           #{@colors[1] || '#eee'};
+@white:                 #{@colors[0] || '#fff'};
 
 // Accent colors
 @blue:                  #049cdb;
@@ -108,7 +112,7 @@ class StylesController < ApplicationController
 // Fluid grid
 @fluidGridColumnWidth:    6.382978723%;
 @fluidGridGutterWidth:    2.127659574%;
-
+      
 #{Lavish::Application::BOOTSTRAP}
     }
   end
