@@ -32,7 +32,7 @@ class StylesController < ApplicationController
 
 // Grays
 @black:                 #{@colors[6] || '#000'};
-@grayDark:              #{@colors[5] || '##222'}; 
+@grayDark:              #{@colors[5] || '##222'};
 @grayDarker:            darken(@grayDark, 10%);
 @gray:                  #{@colors[3] || '#555'};
 @grayLight:             #{@colors[2] || '#999'};
@@ -112,7 +112,7 @@ class StylesController < ApplicationController
 // Fluid grid
 @fluidGridColumnWidth:    6.382978723%;
 @fluidGridGutterWidth:    2.127659574%;
-      
+
 #{Lavish::Application::BOOTSTRAP}
     }
   end
