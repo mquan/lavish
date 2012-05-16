@@ -1,9 +1,23 @@
 class StylesController < ApplicationController
   def set
-    @url = params[:image_url] || "http://sphotos.xx.fbcdn.net/hphotos-snc6/184020_10150260094181987_694716986_7953469_6517626_n.jpg"
-    extr = Prizm::Extractor.new(@url)
-    @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
-    extr = nil
+    if !params[:image_url]
+      @url = "http://sphotos.xx.fbcdn.net/hphotos-snc6/184020_10150260094181987_694716986_7953469_6517626_n.jpg"
+      @colors = ["#DEE7EE", "#BEBBAF", "#AC8F6A", "#8A7056", "#6E6352", "#4D4137", "#131415"]
+    else
+      @url = params[:image_url]
+      begin
+        extr = Prizm::Extractor.new(@url)
+        @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
+        extr = nil
+      rescue
+        @colors = []
+      end
+    end
+    
+    #@url = params[:image_url] || "http://sphotos.xx.fbcdn.net/hphotos-snc6/184020_10150260094181987_694716986_7953469_6517626_n.jpg"
+    #extr = Prizm::Extractor.new(@url)
+    #@colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
+    #extr = nil
     set_style
   end
   
