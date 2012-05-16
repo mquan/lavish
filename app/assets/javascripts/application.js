@@ -24,5 +24,5 @@
 //= require bootstrap/bootstrap-collapse
 //= require bootstrap/bootstrap-carousel
 //= require bootstrap/bootstrap-typeahead
-//= require less-1.2.1.min
+//= require less-1.3.0.min
 //= require lavish
