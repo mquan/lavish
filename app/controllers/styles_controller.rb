@@ -1,31 +1,9 @@
 class StylesController < ApplicationController
   def set
-    if !params[:image_url]
-      @url = "http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
-      @colors = ["#DFE2E7", "#CABEA7", "#B0A48E", "#9D8C73", "#8A765C", "#73604B", "#4D3A27"]
-    else
-      @url = params[:image_url]
-      if @url == "http://farm3.staticflickr.com/2727/4394310695_3792c55ff8.jpg"
-        @colors = ["#FCF8FA", "#DBAABD", "#EA98AA", "#E66D90", "#BD827B", "#C5556B", "#553F45"]
-      elsif @url == "http://farm7.staticflickr.com/6205/6038176125_903a69effe.jpg"
-        @colors = ["#DCD8D5", "#C2BFBC", "#A09F9B", "#778890", "#7C7F7E", "#5C6263", "#2C373D"]
-      elsif @url == "http://farm2.staticflickr.com/1156/5104802230_103b475358.jpg"
-        @colors = ["#E1D9D6", "#CCC4C4", "#B7B6C7", "#C9AFA9", "#A49BAC", "#8D7383", "#4B3939"]
-      else
-        begin
-          extr = Prizm::Extractor.new(@url)
-          @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
-          extr = nil
-        rescue
-          @colors = []
-        end
-      end
-    end
-    
-    #@url = params[:image_url] || "http://a4.sphotos.ak.fbcdn.net/hphotos-ak-snc7/71749_446201531986_694716986_5762971_5788064_n.jpg"
-    #extr = Prizm::Extractor.new(@url)
-    #@colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
-    #extr = nil
+    @url = params[:image_url] || "http://sphotos.xx.fbcdn.net/hphotos-snc6/184020_10150260094181987_694716986_7953469_6517626_n.jpg"
+    extr = Prizm::Extractor.new(@url)
+    @colors = extr.get_colors(7, false).sort { |a, b| b.to_hsla[2] <=> a.to_hsla[2] }.map { |p| extr.to_hex(p) }
+    extr = nil
     set_style
   end
   
@@ -50,14 +28,16 @@ class StylesController < ApplicationController
 
 // Grays
 @black:                 #{@colors[6] || '#000'};
-@grayDark:              #{@colors[5] || '##222'}; 
+@grayDark:              #{@colors[5] || '#222'}; 
 @grayDarker:            darken(@grayDark, 10%);
 @gray:                  #{@colors[3] || '#555'};
 @grayLight:             #{@colors[2] || '#999'};
 @grayLighter:           #{@colors[1] || '#eee'};
 @white:                 #{@colors[0] || '#fff'};
+@realwhite:             '#fff';
 
 // Accent colors
+// -------------------------
 @blue:                  #049cdb;
 @blueDark:              #0064cd;
 @green:                 #46a546;
@@ -67,32 +47,110 @@ class StylesController < ApplicationController
 @pink:                  #c3325f;
 @purple:                #7a43b6;
 
-// Typography
-@baseFontSize:          13px;
-@baseFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
-@baseLineHeight:        18px;
+
+// Scaffolding
+// -------------------------
+@bodyBackground:        @white;
 @textColor:             @grayDark;
 
+// Typography
+// -------------------------
+@sansFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+@serifFontFamily:       Georgia, "Times New Roman", Times, serif;
+@monoFontFamily:        Menlo, Monaco, Consolas, "Courier New", monospace;
+
+@baseFontSize:          13px;
+@baseFontFamily:        @sansFontFamily;
+@baseLineHeight:        18px;
+@altFontFamily:         @serifFontFamily;
+
+@headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
+@headingsFontWeight:    bold;    // instead of browser default, bold
+@headingsColor:         inherit; // empty to use BS default, @textColor
+
+
+// Tables
+// -------------------------
+@tableBackground:                   transparent; // overall background-color
+@tableBackgroundAccent:             #f9f9f9; // for striping
+@tableBackgroundHover:              #f5f5f5; // for hover
+@tableBorder:                       #ddd; // table and cell border
+
+
 // Buttons
-@primaryButtonBackground:    @linkColor;
+// -------------------------
+@btnBackground:                     @white;
+@btnBackgroundHighlight:            darken(@white, 10%);
+@btnBorder:                         #ccc;
+
+@btnPrimaryBackground:              @linkColor;
+@btnPrimaryBackgroundHighlight:     spin(@btnPrimaryBackground, 15%);
+
+@btnInfoBackground:                 #5bc0de;
+@btnInfoBackgroundHighlight:        #2f96b4;
+
+@btnSuccessBackground:              #62c462;
+@btnSuccessBackgroundHighlight:     #51a351;
+
+@btnWarningBackground:              lighten(@orange, 15%);
+@btnWarningBackgroundHighlight:     @orange;
+
+@btnDangerBackground:               #ee5f5b;
+@btnDangerBackgroundHighlight:      #bd362f;
+
+@btnInverseBackground:              @gray;
+@btnInverseBackgroundHighlight:     @grayDarker;
+
+
+// Forms
+// -------------------------
+@inputBackground:               @realwhite;
+@inputBorder:                   #ccc;
+@inputBorderRadius:             3px;
+@inputDisabledBackground:       @grayLighter;
+@formActionsBackground:         #f5f5f5;
+
+// Dropdowns
+// -------------------------
+@dropdownBackground:            @white;
+@dropdownBorder:                rgba(0,0,0,.2);
+@dropdownLinkColor:             @grayDark;
+@dropdownLinkColorHover:        @white;
+@dropdownLinkBackgroundHover:   @linkColor;
 
 // COMPONENT VARIABLES
 // --------------------------------------------------
 
 // Z-index master list
+// -------------------------
 // Used for a bird's eye view of components dependent on the z-axis
 // Try to avoid customizing these :)
-@zindexDropdown:        1000;
-@zindexPopover:         1010;
-@zindexTooltip:         1020;
-@zindexFixedNavbar:     1030;
-@zindexModalBackdrop:   1040;
-@zindexModal:           1050;
+@zindexDropdown:          1000;
+@zindexPopover:           1010;
+@zindexTooltip:           1020;
+@zindexFixedNavbar:       1030;
+@zindexModalBackdrop:     1040;
+@zindexModal:             1050;
+
+
+// Sprite icons path
+// -------------------------
+@iconSpritePath:          "../img/glyphicons-halflings.png";
+@iconWhiteSpritePath:     "../img/glyphicons-halflings-white.png";
+
 
 // Input placeholder text color
-@placeholderText:       @grayLight;
+// -------------------------
+@placeholderText:         @grayLight;
+
+
+// Hr border color
+// -------------------------
+@hrBorder:                @grayLighter;
+
 
 // Navbar
+// -------------------------
 @navbarHeight:                    40px;
 @navbarBackground:                @grayDarker;
 @navbarBackgroundHighlight:       @grayDark;
@@ -100,8 +158,26 @@ class StylesController < ApplicationController
 @navbarText:                      @grayLight;
 @navbarLinkColor:                 @grayLight;
 @navbarLinkColorHover:            @white;
+@navbarLinkColorActive:           @navbarLinkColorHover;
+@navbarLinkBackgroundHover:       transparent;
+@navbarLinkBackgroundActive:      @navbarBackground;
+
+@navbarSearchBackground:          lighten(@navbarBackground, 25%);
+@navbarSearchBackgroundFocus:     @white;
+@navbarSearchBorder:              darken(@navbarSearchBackground, 30%);
+@navbarSearchPlaceholderColor:    #ccc;
+@navbarBrandColor:                @navbarLinkColor;
+
+
+// Hero unit
+// -------------------------
+@heroUnitBackground:              @grayLighter;
+@heroUnitHeadingColor:            inherit;
+@heroUnitLeadColor:               inherit;
+
 
 // Form states and alerts
+// -------------------------
 @warningText:             #c09853;
 @warningBackground:       #fcf8e3;
 @warningBorder:           darken(spin(@warningBackground, -10), 3%);
@@ -122,12 +198,14 @@ class StylesController < ApplicationController
 // --------------------------------------------------
 
 // Default 940px grid
+// -------------------------
 @gridColumns:             12;
 @gridColumnWidth:         60px;
 @gridGutterWidth:         20px;
 @gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
 
 // Fluid grid
+// -------------------------
 @fluidGridColumnWidth:    6.382978723%;
 @fluidGridGutterWidth:    2.127659574%;
       

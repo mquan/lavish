@@ -31,28 +31,26 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
 	  <%= yield %>
 	
-	  <% sample1 = "http://farm3.staticflickr.com/2727/4394310695_3792c55ff8.jpg" %>
-	  <% sample2 = "http://farm7.staticflickr.com/6205/6038176125_903a69effe.jpg" %>
-	  <% sample3 = "http://farm2.staticflickr.com/1156/5104802230_103b475358.jpg" %>
+		<% samples = [
+			{:img => "http://design-seeds.com/palettes/SlicedColor510.png", :url => "http://design-seeds.com/index.php/home/entry/sliced-color"},
+			{:img => "http://design-seeds.com/palettes/SummerTones510_1.png", :url => "http://design-seeds.com/index.php/home/entry/summer-tones2"}, 		
+			{:img => "http://design-seeds.com/palettes/CreatureTones510.png", :url => "http://design-seeds.com/index.php/home/entry/creature-tones1"},
+			{:img => "http://design-seeds.com/palettes/12/SpringTones505.jpg", :url => "http://design-seeds.com/index.php/home/entry/spring-tones3"},
+			{:img => "http://design-seeds.com/palettes/GrassColor510.png", :url => "http://design-seeds.com/index.php/home/entry/grass-color"},
+			{:img => "http://design-seeds.com/palettes/FloatingColor500-1.png", :url => "http://design-seeds.com/index.php/home/entry/floating-color"},
+			{:img => "http://design-seeds.com/palettes/TeaTones505.png", :url => "http://design-seeds.com/index.php/home/entry/tea-tones1"}, 
+			{:img =>"http://design-seeds.com/palettes/CockatooColor500.png", :url => "http://design-seeds.com/index.php/home/entry/cockatoo-color"}, 
+			{:img => "http://design-seeds.com/palettes/DecadentPastels500.png", :url => "http://design-seeds.com/index.php/home/entry/decadent-pastels"}
+		]%>
       <div class="row">
-		<div class='span12'><h2>Want more samples?</h2></div>
-        <div class="span4">
-			<%= image_tag(sample1) %>
-           	<a class="btn" href="/?image_url=<%= sample1 %>">Use this &raquo;</a></p>
-        </div>
-        <div class="span4">
-	        <div class="span4">
-				<%= image_tag(sample2) %>
-	           	<a class="btn" href="/?image_url=<%= sample2 %>">Use this &raquo;</a></p>
-	        </div>
-       </div>
-        <div class="span4">
-	        <div class="span4">
-				<%= image_tag(sample3) %>
-	           	<a class="btn" href="/?image_url=<%= sample3 %>">Use this &raquo;</a></p>
-	        </div>
-        </div>
-      </div>
+		<div class='span12'><h2>Want more samples?</h2> <a href="http://design-seeds.com/"></div>
+				<% samples.each do |sample| %>
+					<div class="span4" style="text-align:center;">
+						<%= link_to image_tag(sample[:img]), sample[:url] %>
+						<p style="margin-top:5px;"><a class="btn btn-success" href="/?image_url=<%= sample[:img] %>">Use this &raquo;</a></p>
+					</div>
+				<% end %>   
+    </div>
 
       <hr>
 

@@ -62,8 +62,8 @@ module Lavish
     names = ['reset', 'mixins', 'scaffolding', 'grid', 'layouts', 'type', 'code', 'forms', 'tables',
       'sprites', 'dropdowns', 'wells', 'component-animations', 'close', 'buttons', 'button-groups', 'alerts',
       'navs', 'navbar', 'breadcrumbs', 'pagination', 'pager', 'modals', 'tooltip', 'popovers',
-      'thumbnails', 'labels', 'progress-bars', 'accordion', 'carousel', 'hero-unit', 'utilities']
-    
+      'thumbnails', 'labels-badges', 'progress-bars', 'accordion', 'carousel', 'hero-unit', 'utilities']
+
     names.each do |name|
       bootstrap += File.read("#{Rails.root.to_s}/config/less/#{name}.less")
     end
