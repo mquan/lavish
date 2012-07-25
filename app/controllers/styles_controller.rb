@@ -118,7 +118,7 @@ class StylesController < ApplicationController
 
 // Forms
 // -------------------------
-@inputBackground:               @realwhite;
+@inputBackground:               #fff;
 @inputBorder:                   #ccc;
 @inputBorderRadius:             3px;
 @inputDisabledBackground:       @grayLighter;
@@ -131,6 +131,10 @@ class StylesController < ApplicationController
 @dropdownLinkColor:             @grayDark;
 @dropdownLinkColorHover:        @white;
 @dropdownLinkBackgroundHover:   @linkColor;
+@dropdownDividerTop:            #e5e5e5;
+@dropdownDividerBottom:         @white;
+
+
 
 // COMPONENT VARIABLES
 // --------------------------------------------------
@@ -207,6 +211,8 @@ class StylesController < ApplicationController
 @infoText:                #3a87ad;
 @infoBackground:          #d9edf7;
 @infoBorder:              darken(spin(@infoBackground, -10), 7%);
+
+
 
 // GRID
 // --------------------------------------------------
