@@ -10,6 +10,7 @@
 .navbar {
   overflow: visible;
   margin-bottom: @baseLineHeight;
+  color: @navbarText;
 
   // Fix for IE7's bad z-indexing so dropdowns don't appear below content that follows the navbar
   *position: relative;
@@ -24,11 +25,8 @@
   padding-right: 20px;
   #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
   border: 1px solid @navbarBorder;
-  .border-radius(@baseBorderRadius);
+  .border-radius(4px);
   .box-shadow(0 1px 4px rgba(0,0,0,.065));
-
-  // Prevent floats from breaking the navbar
-  .clearfix();
 }
 
 // Set width to auto for default container
@@ -40,7 +38,6 @@
 // Override the default collapsed state
 .nav-collapse.collapse {
   height: auto;
-  overflow: visible;
 }
 
 
@@ -56,8 +53,7 @@
   font-weight: 200;
   color: @navbarBrandColor;
   text-shadow: 0 1px 0 @navbarBackgroundHighlight;
-  &:hover,
-  &:focus {
+  &:hover {
     text-decoration: none;
   }
 }
@@ -67,15 +63,13 @@
 .navbar-text {
   margin-bottom: 0;
   line-height: @navbarHeight;
-  color: @navbarText;
 }
 
 // Janky solution for now to account for links outside the .nav
 // -------------------------
 .navbar-link {
   color: @navbarLinkColor;
-  &:hover,
-  &:focus {
+  &:hover {
     color: @navbarLinkColorHover;
   }
 }
@@ -93,18 +87,13 @@
 // -------------------------
 .navbar .btn,
 .navbar .btn-group {
-  .navbarVerticalAlign(30px); // Vertically center in navbar
+  .navbarVerticalAlign(28px); // Vertically center in navbar
 }
-.navbar .btn-group .btn,
-.navbar .input-prepend .btn,
-.navbar .input-append .btn,
-.navbar .input-prepend .btn-group,
-.navbar .input-append .btn-group {
-  margin-top: 0; // then undo the margin here so we don't accidentally double it
+.navbar .btn-group .btn {
+  margin: 0; // then undo the margin here so we don't accidentally double it
 }
 
 // Navbar forms
-// -------------------------
 .navbar-form {
   margin-bottom: 0; // remove default bottom margin
   .clearfix();
@@ -127,7 +116,7 @@
   }
   .input-append,
   .input-prepend {
-    margin-top: 5px;
+    margin-top: 6px;
     white-space: nowrap; // preven two  items from separating within a .navbar-form that has .pull-left
     input {
       margin-top: 0; // remove the margin on top since it's on the parent
@@ -136,7 +125,6 @@
 }
 
 // Navbar search
-// -------------------------
 .navbar-search {
   position: relative;
   float: left;
@@ -157,6 +145,7 @@
 
 .navbar-static-top {
   position: static;
+  width: 100%;
   margin-bottom: 0; // remove 18px margin for default navbar
   .navbar-inner {
     .border-radius(0);
@@ -177,12 +166,12 @@
   z-index: @zindexFixedNavbar;
   margin-bottom: 0; // remove 18px margin for default navbar
 }
-.navbar-fixed-top .navbar-inner,
-.navbar-static-top .navbar-inner {
-  border-width: 0 0 1px;
-}
-.navbar-fixed-bottom .navbar-inner {
-  border-width: 1px 0 0;
+.navbar-fixed-top,
+.navbar-fixed-bottom,
+.navbar-static-top {
+  .navbar-inner {
+    border: 0;
+  }
 }
 .navbar-fixed-top .navbar-inner,
 .navbar-fixed-bottom .navbar-inner {
@@ -206,7 +195,7 @@
 .navbar-fixed-top,
 .navbar-static-top {
   .navbar-inner {
-    .box-shadow(~"0 1px 10px rgba(0,0,0,.1)");
+    .box-shadow(~"inset 0 -1px 0 rgba(0,0,0,.1), 0 1px 10px rgba(0,0,0,.1)");
   }
 }
 
@@ -214,7 +203,7 @@
 .navbar-fixed-bottom {
   bottom: 0;
   .navbar-inner {
-    .box-shadow(~"0 -1px 10px rgba(0,0,0,.1)");
+    .box-shadow(~"inset 0 1px 0 rgba(0,0,0,.1), 0 -1px 10px rgba(0,0,0,.1)");
   }
 }
 
@@ -232,7 +221,6 @@
 }
 .navbar .nav.pull-right {
   float: right; // redeclare due to specificity
-  margin-right: 0; // remove margin on float right nav
 }
 .navbar .nav > li {
   float: left;
@@ -251,10 +239,10 @@
   margin-top: 8px;
 }
 
-// Hover/focus
+// Hover
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
-  background-color: @navbarLinkBackgroundHover; // "transparent" is default to differentiate :hover/:focus from .active
+  background-color: @navbarLinkBackgroundHover; // "transparent" is default to differentiate :hover from .active
   color: @navbarLinkColorHover;
   text-decoration: none;
 }
@@ -266,7 +254,9 @@
   color: @navbarLinkColorActive;
   text-decoration: none;
   background-color: @navbarLinkBackgroundActive;
-  .box-shadow(inset 0 3px 8px rgba(0,0,0,.125));
+  -webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,.125);
+     -moz-box-shadow: inset 0 3px 8px rgba(0,0,0,.125);
+          box-shadow: inset 0 3px 8px rgba(0,0,0,.125);
 }
 
 // Navbar button for toggling navbar items in responsive layouts
@@ -338,13 +328,6 @@
   }
 }
 
-// Caret should match text color on hover/focus
-.navbar .nav li.dropdown > a:hover .caret,
-.navbar .nav li.dropdown > a:focus .caret {
-  border-top-color: @navbarLinkColorHover;
-  border-bottom-color: @navbarLinkColorHover;
-}
-
 // Remove background color from open dropdown
 .navbar .nav li.dropdown.open > .dropdown-toggle,
 .navbar .nav li.dropdown.active > .dropdown-toggle,
@@ -390,6 +373,7 @@
 // -------------------------
 
 .navbar-inverse {
+  color: @navbarInverseText;
 
   .navbar-inner {
     #gradient > .vertical(@navbarInverseBackgroundHighlight, @navbarInverseBackground);
@@ -400,18 +384,9 @@
   .nav > li > a {
     color: @navbarInverseLinkColor;
     text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-    &:hover,
-    &:focus {
+    &:hover {
       color: @navbarInverseLinkColorHover;
     }
-  }
-
-  .brand {
-    color: @navbarInverseBrandColor;
-  }
-
-  .navbar-text {
-    color: @navbarInverseText;
   }
 
   .nav > li > a:focus,
@@ -430,8 +405,7 @@
   // Inline text links
   .navbar-link {
     color: @navbarInverseLinkColor;
-    &:hover,
-    &:focus {
+    &:hover {
       color: @navbarInverseLinkColorHover;
     }
   }
@@ -448,11 +422,6 @@
   .nav li.dropdown.open.active > .dropdown-toggle {
     background-color: @navbarInverseLinkBackgroundActive;
     color: @navbarInverseLinkColorActive;
-  }
-  .nav li.dropdown > a:hover .caret,
-  .nav li.dropdown > a:focus .caret {
-    border-top-color: @navbarInverseLinkColorActive;
-    border-bottom-color: @navbarInverseLinkColorActive;
   }
   .nav li.dropdown > .dropdown-toggle .caret {
     border-top-color: @navbarInverseLinkColor;
@@ -495,3 +464,6 @@
   }
 
 }
+
+
+
