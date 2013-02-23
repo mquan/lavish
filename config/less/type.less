@@ -11,7 +11,7 @@ p {
 }
 .lead {
   margin-bottom: @baseLineHeight;
-  font-size: @baseFontSize * 1.5;
+  font-size: 20px;
   font-weight: 200;
   line-height: @baseLineHeight * 1.5;
 }
@@ -20,37 +20,21 @@ p {
 // Emphasis & misc
 // -------------------------
 
-// Ex: 14px base font * 85% = about 12px
-small   { font-size: 85%; }
-
-strong  { font-weight: bold; }
-em      { font-style: italic; }
-cite    { font-style: normal; }
-
-// Utility classes
-.muted               { color: @grayLight; }
-a.muted:hover,
-a.muted:focus        { color: darken(@grayLight, 10%); }
-
-.text-warning        { color: @warningText; }
-a.text-warning:hover,
-a.text-warning:focus { color: darken(@warningText, 10%); }
-
-.text-error          { color: @errorText; }
-a.text-error:hover,
-a.text-error:focus   { color: darken(@errorText, 10%); }
-
-.text-info           { color: @infoText; }
-a.text-info:hover,
-a.text-info:focus    { color: darken(@infoText, 10%); }
-
-.text-success        { color: @successText; }
-a.text-success:hover,
-a.text-success:focus { color: darken(@successText, 10%); }
-
-.text-left           { text-align: left; }
-.text-right          { text-align: right; }
-.text-center         { text-align: center; }
+small {
+  font-size: 85%; // Ex: 14px base font * 85% = about 12px
+}
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+cite {
+  font-style: normal;
+}
+.muted {
+  color: @grayLight;
+}
 
 
 // Headings
@@ -60,7 +44,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: (@baseLineHeight / 2) 0;
   font-family: @headingsFontFamily;
   font-weight: @headingsFontWeight;
-  line-height: @baseLineHeight;
+  line-height: 1;
   color: @headingsColor;
   text-rendering: optimizelegibility; // Fix the character spacing for headings
   small {
@@ -69,22 +53,17 @@ h1, h2, h3, h4, h5, h6 {
     color: @grayLight;
   }
 }
+h1 { font-size: 36px; line-height: 40px; }
+h2 { font-size: 30px; line-height: 40px; }
+h3 { font-size: 24px; line-height: 40px; }
+h4 { font-size: 18px; line-height: 20px; }
+h5 { font-size: 14px; line-height: 20px; }
+h6 { font-size: 12px; line-height: 20px; }
 
-h1,
-h2,
-h3 { line-height: @baseLineHeight * 2; }
-
-h1 { font-size: @baseFontSize * 2.75; } // ~38px
-h2 { font-size: @baseFontSize * 2.25; } // ~32px
-h3 { font-size: @baseFontSize * 1.75; } // ~24px
-h4 { font-size: @baseFontSize * 1.25; } // ~18px
-h5 { font-size: @baseFontSize; }
-h6 { font-size: @baseFontSize * 0.85; } // ~12px
-
-h1 small { font-size: @baseFontSize * 1.75; } // ~24px
-h2 small { font-size: @baseFontSize * 1.25; } // ~18px
-h3 small { font-size: @baseFontSize; }
-h4 small { font-size: @baseFontSize; }
+h1 small { font-size: 24px; }
+h2 small { font-size: 18px; }
+h3 small { font-size: 14px; }
+h4 small { font-size: 14px; }
 
 
 // Page header
@@ -115,25 +94,10 @@ ol ul {
 li {
   line-height: @baseLineHeight;
 }
-
-// Remove default list styles
 ul.unstyled,
 ol.unstyled {
   margin-left: 0;
   list-style: none;
-}
-
-// Single-line list items
-ul.inline,
-ol.inline {
-  margin-left: 0;
-  list-style: none;
-  > li {
-    display: inline-block;
-    .ie7-inline-block();
-    padding-left: 5px;
-    padding-right: 5px;
-  }
 }
 
 // Description Lists
@@ -152,16 +116,15 @@ dd {
 }
 // Horizontal layout (like forms)
 .dl-horizontal {
-  .clearfix(); // Ensure dl clears floats if empty dd elements present
   dt {
     float: left;
-    width: @horizontalComponentOffset - 20;
+    width: 120px;
     clear: left;
     text-align: right;
     .text-overflow();
   }
   dd {
-    margin-left: @horizontalComponentOffset;
+    margin-left: 130px;
   }
 }
 
@@ -177,9 +140,7 @@ hr {
 }
 
 // Abbreviations and acronyms
-abbr[title],
-// Added data-* attribute to help out our tooltip plugin, per https://github.com/twitter/bootstrap/issues/5257
-abbr[data-original-title] {
+abbr[title] {
   cursor: help;
   border-bottom: 1px dotted @grayLight;
 }
@@ -195,9 +156,7 @@ blockquote {
   border-left: 5px solid @grayLighter;
   p {
     margin-bottom: 0;
-    font-size: @baseFontSize * 1.25;
-    font-weight: 300;
-    line-height: 1.25;
+    #font > .shorthand(16px,300,@baseLineHeight * 1.25);
   }
   small {
     display: block;

@@ -29,13 +29,12 @@
   padding: 4px;
   line-height: @baseLineHeight;
   border: 1px solid #ddd;
-  .border-radius(@baseBorderRadius);
+  .border-radius(4px);
   .box-shadow(0 1px 3px rgba(0,0,0,.055));
   .transition(all .2s ease-in-out);
 }
-// Add a hover/focus state for linked versions only
-a.thumbnail:hover,
-a.thumbnail:focus {
+// Add a hover state for linked versions only
+a.thumbnail:hover {
   border-color: @linkColor;
   .box-shadow(0 1px 4px rgba(0,105,214,.25));
 }

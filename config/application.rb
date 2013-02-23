@@ -55,11 +55,11 @@ module Lavish
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-
+    
     config.middleware.use "UseWWW" if Rails.env.production?
-
+        
     bootstrap = ''
-    names = ['mixins', 'reset', 'scaffolding', 'grid', 'layouts', 'type', 'code', 'forms', 'tables',
+    names = ['reset', 'mixins', 'scaffolding', 'grid', 'layouts', 'type', 'code', 'forms', 'tables',
       'sprites', 'dropdowns', 'wells', 'component-animations', 'close', 'buttons', 'button-groups', 'alerts',
       'navs', 'navbar', 'breadcrumbs', 'pagination', 'pager', 'modals', 'tooltip', 'popovers',
       'thumbnails', 'labels-badges', 'progress-bars', 'accordion', 'carousel', 'hero-unit', 'utilities']
@@ -67,12 +67,12 @@ module Lavish
     names.each do |name|
       bootstrap += File.read("#{Rails.root.to_s}/config/less/#{name}.less")
     end
-
+    
     BOOTSTRAP = bootstrap
     ELEMENTS = [
-      'background, link color hover',
-      'nav background hover, nav tabs borders',
-      'navbar link color, placeholder text',
+      'background, link color hover', 
+      'nav background hover, nav tabs borders', 
+      'navbar link color, placeholder text', 
       'link color within dropdown',
       'link color, primary button background',
       'text color, btn text color, navbar background',
