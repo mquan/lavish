@@ -7,8 +7,8 @@ window.lavish_parse = (rawless)->
 			css = tree.toCSS()
 			$('#css-code').val(css)
 			$('#lavish-style').text(css)
-			
-$(document).ready ->			
+
+$(document).ready ->
 	$('.select-color').on 'click', ->
 		val = $('.value', this).text()
 		$label = $('.color-label', $(this).closest('.btn-group'))
@@ -18,6 +18,6 @@ $(document).ready ->
 		$(this).closest('.btn-group').removeClass('open')
 		$('#customize-form').submit();
 		false
-		
+
 	$('.color-input').on 'change', ->
 		$('#customize-form').submit();

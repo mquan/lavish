@@ -8,57 +8,63 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="/">Lavish</a>
-          <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
-
+  <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Lavish</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
 
-      <!-- Main hero unit for a primary marketing message or call to action -->
+  <div class="container">
+
 	  <%= yield %>
-	
+
 		<% samples = [
-			{:img => "http://design-seeds.com/palettes/SlicedColor510.png", :url => "http://design-seeds.com/index.php/home/entry/sliced-color"},
-			{:img => "http://design-seeds.com/palettes/SummerTones510_1.png", :url => "http://design-seeds.com/index.php/home/entry/summer-tones2"}, 		
-			{:img => "http://design-seeds.com/palettes/CreatureTones510.png", :url => "http://design-seeds.com/index.php/home/entry/creature-tones1"},
-			{:img => "http://design-seeds.com/palettes/12/SpringTones505.jpg", :url => "http://design-seeds.com/index.php/home/entry/spring-tones3"},
-			{:img => "http://design-seeds.com/palettes/GrassColor510.png", :url => "http://design-seeds.com/index.php/home/entry/grass-color"},
-			{:img => "http://design-seeds.com/palettes/FloatingColor500-1.png", :url => "http://design-seeds.com/index.php/home/entry/floating-color"},
-			{:img => "http://design-seeds.com/palettes/TeaTones505.png", :url => "http://design-seeds.com/index.php/home/entry/tea-tones1"}, 
-			{:img =>"http://design-seeds.com/palettes/CockatooColor500.png", :url => "http://design-seeds.com/index.php/home/entry/cockatoo-color"}, 
-			{:img => "http://design-seeds.com/palettes/DecadentPastels500.png", :url => "http://design-seeds.com/index.php/home/entry/decadent-pastels"}
+      {img: "http://design-seeds.com/palettes/CreatureTones510.png", url: "http://design-seeds.com/index.php/home/entry/creature-tones1"},
+			{img: "http://design-seeds.com/palettes/SlicedColor510.png", url: "http://design-seeds.com/index.php/home/entry/sliced-color"},
+			{img: "http://design-seeds.com/palettes/FloatingColor500-1.png", url: "http://design-seeds.com/index.php/home/entry/floating-color"},
+			{img: "http://design-seeds.com/palettes/12/SpringTones505.jpg", url: "http://design-seeds.com/index.php/home/entry/spring-tones3"},
+			{img: "http://design-seeds.com/palettes/GrassColor510.png", url: "http://design-seeds.com/index.php/home/entry/grass-color"},
+			{img: "http://design-seeds.com/palettes/SummerTones510_1.png", url: "http://design-seeds.com/index.php/home/entry/summer-tones2"},
+
+			{img: "http://design-seeds.com/palettes/TeaTones505.png", url: "http://design-seeds.com/index.php/home/entry/tea-tones1"},
+      {img: "http://design-seeds.com/palettes/DecadentPastels500.png", url: "http://design-seeds.com/index.php/home/entry/decadent-pastels"},
+			{img: "http://design-seeds.com/palettes/CockatooColor500.png", url: "http://design-seeds.com/index.php/home/entry/cockatoo-color"}
 		]%>
-      <div class="row">
-		<div class='span12'><h2>Want more samples?</h2> <a href="http://design-seeds.com/"></div>
-				<% samples.each do |sample| %>
-					<div class="span4" style="text-align:center;">
-						<%= link_to image_tag(sample[:img]), sample[:url] %>
-						<p style="margin-top:5px;"><a class="btn btn-success" href="/?image_url=<%= sample[:img] %>">Use this &raquo;</a></p>
-					</div>
-				<% end %>   
+    <div class="page-header">
+      <h2>Want more samples?</h2>
     </div>
 
-      <hr>
+    <div class="row">
+  		<% samples.each do |sample| %>
+  			<div class="col-sm-6 col-md-4 sample-container">
+          <div class="thumbnail">
+            <%= link_to image_tag(sample[:img]), sample[:url], class: "image-link" %>
+  					<div class="caption">
+              <a class="btn btn-success" href="/?image_url=<%= sample[:img] %>">Use this &raquo;</a>
+            </div>
+          </div>
+  			</div>
+  		<% end %>
+    </div>
 
-      <footer>
-        <p>;-) A side project by Quan</p>
-      </footer>
+    <hr>
+    <footer>
+      <p>;-) A side project by Quan</p>
+    </footer>
 
-    </div> <!-- /container -->
+  </div> <!-- /container -->
 	<script type="text/javascript">
 
 	  var _gaq = _gaq || [];
@@ -72,5 +78,5 @@
 	  })();
 
 	</script>
-  </body>
+</body>
 </html>

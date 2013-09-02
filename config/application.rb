@@ -55,27 +55,33 @@ module Lavish
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    
+
     config.middleware.use "UseWWW" if Rails.env.production?
-        
+
     bootstrap = ''
-    names = ['reset', 'mixins', 'scaffolding', 'grid', 'layouts', 'type', 'code', 'forms', 'tables',
-      'sprites', 'dropdowns', 'wells', 'component-animations', 'close', 'buttons', 'button-groups', 'alerts',
-      'navs', 'navbar', 'breadcrumbs', 'pagination', 'pager', 'modals', 'tooltip', 'popovers',
-      'thumbnails', 'labels-badges', 'progress-bars', 'accordion', 'carousel', 'hero-unit', 'utilities']
+    names = [
+      "mixins", "normalize", "print",
+      "scaffolding", "type", "code", "grid", "tables", "forms", "buttons",
+      "component-animations", "glyphicons", "dropdowns", "button-groups",
+      "input-groups", "navs", "navbar", "breadcrumbs", "pagination", "pager", "labels",
+      "badges", "jumbotron", "thumbnails", "alerts", "progress-bars",
+      "media", "list-group", "panels", "wells", "close",
+      "modals", "tooltip", "popovers", "carousel",
+      "utilities", "responsive-utilities"]
 
     names.each do |name|
       bootstrap += File.read("#{Rails.root.to_s}/config/less/#{name}.less")
     end
-    
+
     BOOTSTRAP = bootstrap
+    #should show those element here
     ELEMENTS = [
-      'background, link color hover', 
-      'nav background hover, nav tabs borders', 
-      'navbar link color, placeholder text', 
-      'link color within dropdown',
-      'link color, primary button background',
-      'text color, btn text color, navbar background',
+      'body background',
+      'disabled input & button background, input addon background, nav & tabs & pagination link hover background, jumbotron background',
+      'disabled link color, input placeholder color, dropdown header color, navbar inverse & link color',
+      'link color, primary button background, pagination active background, progress bar background, label background, panel heading color',
+      'nav tab link hover color',
+      'text color, legend color, dropdown link color, panel text color, code color',
       'modal backdrop & tooltip & popover background'
     ]
   end

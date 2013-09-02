@@ -2,39 +2,34 @@ body {
   padding-top: 60px;
   padding-bottom: 40px;
 }
-.color { 
+.color {
 	float:left;
 	width: 70px;
 	height: 240px;
 	text-align:center;
 	color: #ffffff;
 }
-.palette {
-	float:left;
-	margin-left:20px;
-}
-.lavish-image {
-	float:left;
-}
-.image-url {
-	width:600px;
-	height:28px;
-	font-size:1.1em;
-}
 .customize-color {
 	width:20px;
 	height:15px;
 }
 
-.code-textarea {
-	width:450px;
+.selected-color {
+	display:inline-block;
+	width:18px;
+	height:12px;
 }
 
 img.lavish-image {
 	width:360px;
 }
-.selected-color {
-	display:inline-block;
-	width:18px;
-	height:12px;
+
+div.sample-container {
+	text-align: center;
+	margin-bottom: 10px;
+	a.image-link {
+		img {
+			width: 100%;
+		}
+	}
 }
