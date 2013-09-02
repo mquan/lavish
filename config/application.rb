@@ -84,7 +84,7 @@ module Lavish
       'link color, primary button background, pagination active background, progress bar background, label background, panel heading color',
       'nav tab link hover color',
       'text color, legend color, dropdown link color, panel text color, code color',
-      'navbar background'
+      'navbar inverse background'
     ]
   end
 end
