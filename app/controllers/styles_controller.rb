@@ -1,8 +1,8 @@
 class StylesController < ApplicationController
   def new
     if params[:image_url].blank?
-      @url = "https://sphotos-b-sjc.xx.fbcdn.net/hphotos-frc3/184020_10150260094181987_6517626_n.jpg"
-      @colors = ["#DEE7EE", "#BEBBAF", "#AC8F6A", "#8A7056", "#6E6352", "#4D4137", "#131415"]
+      @url = "https://sphotos-a-sjc.xx.fbcdn.net/hphotos-prn1/163026_481734701986_7179594_n.jpg"
+      @colors = ["#D4D8D1", "#A8A8A1", "#AA9A66", "#B74934", "#577492", "#67655D", "#332C2F"]
     else
       @url = params[:image_url]
       begin
