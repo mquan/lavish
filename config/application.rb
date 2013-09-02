@@ -73,6 +73,8 @@ module Lavish
       bootstrap += File.read("#{Rails.root.to_s}/config/less/#{name}.less")
     end
 
+    VARIABLES = File.read("#{Rails.root.to_s}/config/less/variables.less")
+
     BOOTSTRAP = bootstrap
     #should show those element here
     ELEMENTS = [
