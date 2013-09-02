@@ -33,7 +33,10 @@ class StylesController < ApplicationController
     variables.gsub!(/(@gray-light:\s+)[^;]+/i, '\1' + @colors[2].downcase)
     variables.gsub!(/(@gray:\s+)[^;]+/i, '\1' + @colors[3].downcase)
     variables.gsub!(/(@gray-dark:\s+)[^;]+/i, '\1' + @colors[5].downcase)
+    #variables.gsub!(/(@gray-darker:\s+)[^;]+/i, '\1' + @colors[6].downcase)
+
     variables.gsub!(/(@brand-primary:\s+)[^;]+/i, '\1' + @colors[4].downcase)
+    variables.gsub!(/(@navbar-inverse-bg:\s+)[^;]+/i, '\1' + @colors[6].downcase)
     variables.gsub!(/(@table-border-color:\s+)[^;]+/i, '\1' + @colors[5].downcase)
 
     @less = variables + Lavish::Application::BOOTSTRAP
