@@ -20,62 +20,32 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
+          <li class="<%= navbar_active?('new')%>"><a href="/">Home</a></li>
+          <li class="<%= navbar_active?('preview')%>"><a href="/preview">Preview</a></li>
         </ul>
-      </div><!--/.nav-collapse -->
+      </div>
     </div>
   </div>
 
   <div class="container">
-
-	  <%= yield %>
-
-		<% samples = [
-      {img: "http://design-seeds.com/palettes/CreatureTones510.png", url: "http://design-seeds.com/index.php/home/entry/creature-tones1"},
-			{img: "http://design-seeds.com/palettes/SlicedColor510.png", url: "http://design-seeds.com/index.php/home/entry/sliced-color"},
-			{img: "http://design-seeds.com/palettes/FloatingColor500-1.png", url: "http://design-seeds.com/index.php/home/entry/floating-color"},
-			{img: "http://design-seeds.com/palettes/12/SpringTones505.jpg", url: "http://design-seeds.com/index.php/home/entry/spring-tones3"},
-			{img: "http://design-seeds.com/palettes/GrassColor510.png", url: "http://design-seeds.com/index.php/home/entry/grass-color"},
-			{img: "http://design-seeds.com/palettes/PenciledPalette.png", url: "http://design-seeds.com/index.php/home/entry/penciled-palette"},
-			{img: "http://design-seeds.com/palettes/MineralHues_3.png", url: "http://design-seeds.com/index.php/home/entry/mineral-hues4"},
-      {img: "http://design-seeds.com/palettes/SeaTones_1.png", url: "http://design-seeds.com/index.php/home/entry/sea-tones1"},
-			{img: "http://design-seeds.com/palettes/CockatooColor500.png", url: "http://design-seeds.com/index.php/home/entry/cockatoo-color"}
-		]%>
-    <div class="page-header">
-      <h2>Want more samples?</h2>
-    </div>
-
-    <div class="row">
-  		<% samples.each do |sample| %>
-  			<div class="col-sm-6 col-md-4 sample-container">
-          <div class="thumbnail">
-            <%= link_to image_tag(sample[:img]), sample[:url], class: "image-link" %>
-  					<div class="caption">
-              <a class="btn btn-success" href="/?image_url=<%= sample[:img] %>">Use this &raquo;</a>
-            </div>
-          </div>
-  			</div>
-  		<% end %>
-    </div>
+    <%= yield %>
 
     <hr>
     <footer>
       <p>;-) A side project by Quan</p>
     </footer>
+  </div>
 
-  </div> <!-- /container -->
-	<script type="text/javascript">
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-12037604-8']);
+    _gaq.push(['_trackPageview']);
 
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-12037604-8']);
-	  _gaq.push(['_trackPageview']);
-
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
-
-	</script>
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 </body>
 </html>

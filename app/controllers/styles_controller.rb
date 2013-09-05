@@ -1,8 +1,9 @@
 class StylesController < ApplicationController
+  DEFAULT_COLORS = ["#D4D8D1", "#A8A8A1", "#AA9A66", "#B74934", "#577492", "#67655D", "#332C2F"]
   def new
     if params[:image_url].blank?
       @url = "https://sphotos-a-sjc.xx.fbcdn.net/hphotos-prn1/163026_481734701986_7179594_n.jpg"
-      @colors = ["#D4D8D1", "#A8A8A1", "#AA9A66", "#B74934", "#577492", "#67655D", "#332C2F"]
+      @colors = DEFAULT_COLORS
     else
       @url = params[:image_url]
       begin
@@ -16,12 +17,19 @@ class StylesController < ApplicationController
 
     bootstrap
 
-    render layout: "bootstrap-3.0.0"
+    render "bootstrap-3.0.0", layout: "bootstrap-3.0.0"
   end
 
   def customize
     @colors = params[:colors]
     bootstrap
+  end
+
+  def preview
+    @colors = params[:colors] || DEFAULT_COLORS
+    bootstrap
+
+    render "preview", layout: "bootstrap-3.0.0"
   end
 
   private

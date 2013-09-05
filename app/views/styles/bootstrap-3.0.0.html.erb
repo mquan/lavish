@@ -1,0 +1,103 @@
+<div class="jumbotron">
+  <h1>Lavish, Bootstrap like a King</h1>
+  <p>Generate your own Bootstrap color scheme from an image and customize to your taste</p>
+  <p style="font-weight:bold;text-align:center;">Now compatible with Bootstrap 3.0.0</p>
+  <div style="text-align:center;">
+    <a href='https://github.com/mquan/lavish' class='btn btn-lg btn-default' style="margin-right: 10px;">Github Page</a>
+    <%= link_to "Live Preview", preview_path(colors: @colors), class: "btn btn-lg btn-primary" %>
+  </div>
+</div>
+
+<div class="page-header">
+  <h2>Step 1: Provide an image</h2>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_tag('/', class: 'form-inline', method: 'get') do %>
+      <div class="form-group col-md-8">
+        <%= text_field_tag :image_url, @url, placeholder: "Enter image URL", class: 'form-control' %>
+      </div>
+      <%= submit_tag "Go Lavish", class: 'btn btn-large btn-primary' %>
+    <% end %>
+  </div>
+
+  <div class="col-md-12" style="margin-top:20px;">
+    <div class='col-md-5 lavish-image'><%= image_tag(@url, {:class => 'lavish-image' }) %></div>
+    <div class="col-md-7 palette">
+      <% last_color = @colors[@colors.length-1] %>
+      <% @colors.each_with_index do |c, i| %>
+        <div class='color' style="background-color:<%= c%>;border-top:1px solid <%= last_color%>;border-bottom:1px solid <%= last_color%>;<%= %{border-left:1px solid #{last_color};} if i == 0 %>"><%= c %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="page-header">
+  <h2>Step 2: Customize everything</h2>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= form_tag customize_path, :remote => true, :id => 'customize-form' do %>
+      <table class='table table-bordered'>
+        <% @colors.each_with_index do |color, index| %>
+          <tr>
+            <td class="col-md-6"><%= Lavish::Application::ELEMENTS[index]%></td>
+            <td class="col-md-3" style="text-align:center;"><%= render :partial => 'dropdown', :locals => { :colors => @colors, :index => index } %></td>
+            <td class="col-md-3" style="text-align:center;"><%= text_field_tag "colors[]", color, {:class => 'form-input', :style => 'width:88px;', 'data-index' => index } %></td>
+          </tr>
+        <% end %>
+      </table>
+      <%= submit_tag "Customize", :class => 'btn btn-lg btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="page-header">
+  <h2>Step 3: Get the code</h2>
+</div>
+<div class="row">
+  <form>
+    <div class="col-md-6">
+      <h3>CSS</h3>
+      <%=raw text_area_tag :css, '', rows: 15, id: 'css-code', class: 'form-control' %>
+    </div>
+    <div class="col-md-6">
+      <h3>LESS</h3>
+      <%=raw text_area_tag :less, @less, rows: 15, id: 'less-code', class: 'form-control' %>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <div class="col-md-12">* Please be sure to change /assets/fonts/ to your preferred folder containing the glyphicons</div>
+</div>
+
+<script type="text/javascript">
+  lavish_parse('<%=raw j @less%>');
+</script>
+<% samples = [
+  {img: "http://design-seeds.com/palettes/CreatureTones510.png", url: "http://design-seeds.com/index.php/home/entry/creature-tones1"},
+  {img: "http://design-seeds.com/palettes/SlicedColor510.png", url: "http://design-seeds.com/index.php/home/entry/sliced-color"},
+  {img: "http://design-seeds.com/palettes/FloatingColor500-1.png", url: "http://design-seeds.com/index.php/home/entry/floating-color"},
+  {img: "http://design-seeds.com/palettes/12/SpringTones505.jpg", url: "http://design-seeds.com/index.php/home/entry/spring-tones3"},
+  {img: "http://design-seeds.com/palettes/GrassColor510.png", url: "http://design-seeds.com/index.php/home/entry/grass-color"},
+  {img: "http://design-seeds.com/palettes/PenciledPalette.png", url: "http://design-seeds.com/index.php/home/entry/penciled-palette"},
+  {img: "http://design-seeds.com/palettes/MineralHues_3.png", url: "http://design-seeds.com/index.php/home/entry/mineral-hues4"},
+  {img: "http://design-seeds.com/palettes/SeaTones_1.png", url: "http://design-seeds.com/index.php/home/entry/sea-tones1"},
+  {img: "http://design-seeds.com/palettes/CockatooColor500.png", url: "http://design-seeds.com/index.php/home/entry/cockatoo-color"}
+]%>
+<div class="page-header">
+  <h2>Want more samples?</h2>
+</div>
+
+<div class="row">
+  <% samples.each do |sample| %>
+    <div class="col-sm-6 col-md-4 sample-container">
+      <div class="thumbnail">
+        <%= link_to image_tag(sample[:img]), sample[:url], class: "image-link" %>
+        <div class="caption">
+          <a class="btn btn-success" href="/?image_url=<%= sample[:img] %>">Use this &raquo;</a>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

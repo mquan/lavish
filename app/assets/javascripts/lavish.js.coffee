@@ -21,3 +21,6 @@ $(document).ready ->
 
 	$('.color-input').on 'change', ->
 		$('#customize-form').submit();
+
+	$("#preview-toggle").click ->
+		preview("http://getbootstrap.com/examples/theme/")
