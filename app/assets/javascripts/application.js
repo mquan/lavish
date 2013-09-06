@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jscolor-1.4.1
 //= require bootstrap-3.0.0
 //= require less-1.4.2
 //= require lavish

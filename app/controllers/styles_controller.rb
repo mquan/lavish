@@ -21,12 +21,10 @@ class StylesController < ApplicationController
   end
 
   def customize
-    @colors = params[:colors]
     bootstrap
   end
 
   def preview
-    @colors = params[:colors] || DEFAULT_COLORS
     bootstrap
 
     render "preview", layout: "bootstrap-3.0.0"
@@ -35,6 +33,8 @@ class StylesController < ApplicationController
   private
 
   def bootstrap
+    parse_colors
+
     variables = Lavish::Application::VARIABLES
     variables.gsub!(/(@body-bg:\s+)[^;]+/i, '\1' + @colors[0].downcase)
     variables.gsub!(/(@gray-lighter:\s+)[^;]+/i, '\1' + @colors[1].downcase)
@@ -48,5 +48,13 @@ class StylesController < ApplicationController
     variables.gsub!(/(@table-border-color:\s+)[^;]+/i, '\1' + @colors[5].downcase)
 
     @less = variables + Lavish::Application::BOOTSTRAP
+  end
+
+  def parse_colors
+    @colors ||= if params[:colors]
+      params[:colors].map { |color| color.match(/^#/) ? color : "##{color}" }
+    else
+      DEFAULT_COLORS
+    end
   end
 end

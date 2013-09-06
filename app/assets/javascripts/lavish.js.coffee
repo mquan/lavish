@@ -19,8 +19,5 @@ $(document).ready ->
 		$('#customize-form').submit();
 		false
 
-	$('.color-input').on 'change', ->
+	$('.color-input, input.jscolor').on 'change', ->
 		$('#customize-form').submit();
-
-	$("#preview-toggle").click ->
-		preview("http://getbootstrap.com/examples/theme/")

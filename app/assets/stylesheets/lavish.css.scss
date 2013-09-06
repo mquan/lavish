@@ -30,7 +30,8 @@ body {
 }
 
 img.lavish-image {
-	width:360px;
+	width: 360px;
+	margin-bottom: 10px;
 }
 
 div.sample-container {
@@ -41,6 +42,11 @@ div.sample-container {
 			width: 100%;
 		}
 	}
+}
+
+input.jscolor {
+	width: 88px;
+	margin: auto;
 }
 
 .bs-example {
