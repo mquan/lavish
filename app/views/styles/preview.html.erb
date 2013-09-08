@@ -309,5 +309,6 @@
 </div>
 
 <script type="text/javascript">
-  lavish_parse('<%=raw j @less%>');
+  window.lavishVariables = "<%=raw j @variables %>";
+  lavishParse('<%=raw j @less%>');
 </script>
