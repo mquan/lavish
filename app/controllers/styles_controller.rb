@@ -2,7 +2,7 @@ class StylesController < ApplicationController
   DEFAULT_COLORS = ["#D4D8D1", "#A8A8A1", "#AA9A66", "#B74934", "#577492", "#67655D", "#332C2F"]
   def new
     if params[:image_url].blank?
-      @url = "https://sphotos-a-sjc.xx.fbcdn.net/hphotos-prn1/163026_481734701986_7179594_n.jpg"
+      @url = "https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xaf1/v/t1.0-9/163026_481734701986_7179594_n.jpg?oh=1bd1a779387067b81401135d48fb3dcf&oe=54D3E531&__gda__=1423359695_52f0a1bb89b0b8058ad87ac31c5fcce6"
       @colors = DEFAULT_COLORS
     else
       @url = params[:image_url]
