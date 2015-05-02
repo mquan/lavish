@@ -1,11 +1,9 @@
 class StylesController < ApplicationController
-  include ActionView::Helpers::AssetTagHelper
-
   DEFAULT_COLORS = ["#D4D8D1", "#A8A8A1", "#AA9A66", "#B74934", "#577492", "#67655D", "#332C2F"]
 
   def new
     if params[:image_url].blank?
-      @url = image_url("default.jpg")
+      @url = ActionController::Base.helpers.asset_path("default.jpg")
       @colors = DEFAULT_COLORS
     else
       @url = params[:image_url]
