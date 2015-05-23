@@ -134,7 +134,7 @@ DEPENDENCIES
   prizm
   rails (= 4.2.1)
   rails_12factor
-  rmagick
+  rmagick (~> 2.15.0)
   sass-rails (~> 5.0.3)
   sqlite3
   uglifier (>= 2.7.1)

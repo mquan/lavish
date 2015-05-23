@@ -9,7 +9,7 @@ end
 group :production do
   gem 'pg'
 end
-gem "rmagick", :require => 'RMagick'
+gem "rmagick", '~> 2.15.0'
 gem "prizm"
 
 # Gems used only for assets and not required
