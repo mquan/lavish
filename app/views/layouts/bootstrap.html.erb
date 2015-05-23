@@ -21,7 +21,7 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li class="<%= navbar_active?('new')%>"><a href="/">Home</a></li>
-          <li class="<%= navbar_active?('preview')%>"><a href="/preview">Preview</a></li>
+          <li class="<%= navbar_active?('preview')%>"><%= link_to 'Preview', preview_path(colors: @colors), class: 'preview-link' %></li>
         </ul>
       </div>
     </div>

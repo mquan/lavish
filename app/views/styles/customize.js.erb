@@ -1,5 +1,5 @@
 window.lavishVariables = "<%=raw j @variables %>";
-var rawless = '<%=raw j @less%>';
+var rawless = '<%=raw j @less %>';
 $('#less-code').val(rawless);
 lavishParse(rawless);
-$("#preview-link").attr("href", "<%= preview_path(colors: @colors)%>");
+$("a.preview-link").prop("href", "<%=j URI.escape preview_path(colors: @colors) %>");

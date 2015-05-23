@@ -59,32 +59,52 @@ module Lavish
     config.middleware.use "UseWWW" if Rails.env.production?
 
     bootstrap = ''
-    names = [
-      "mixins", "normalize", "print",
-      "scaffolding", "type", "code", "grid", "tables", "forms", "buttons",
-      "component-animations", "glyphicons", "dropdowns", "button-groups",
-      "input-groups", "navs", "navbar", "breadcrumbs", "pagination", "pager", "labels",
-      "badges", "jumbotron", "thumbnails", "alerts", "progress-bars",
-      "media", "list-group", "panels", "wells", "close",
-      "modals", "tooltip", "popovers", "carousel",
-      "utilities", "responsive-utilities"]
+    mixins = [
+      'hide-text', 'opacity', 'image', 'labels', 'reset-filter', 'resize', 'responsive-visibility',
+      'size', 'tab-focus', 'text-emphasis', 'text-overflow', 'vendor-prefixes',
+      'alerts', 'buttons', 'panels', 'pagination', 'list-group', 'nav-divider',
+      'forms', 'progress-bar', 'table-row', 'background-variant', 'border-radius', 'gradients',
+      'clearfix', 'center-block', 'nav-vertical-align', 'grid-framework', 'grid'
+    ]
 
-    names.each do |name|
-      bootstrap += File.read("#{Rails.root.to_s}/config/less/#{name}.less")
+    mixins.each do |mixin|
+      bootstrap += File.read("#{Rails.root.to_s}/css/bootstrap-3.3.4/mixins/_#{mixin}.scss")
     end
 
-    VARIABLES = File.read("#{Rails.root.to_s}/config/less/variables.less")
+    names = [
+      'normalize', 'print', 'glyphicons',
+      'scaffolding', 'type', 'code', 'grid', 'tables', 'forms', 'buttons',
+      'component-animations', 'dropdowns', 'button-groups', 'input-groups',
+      'navs', 'navbar', 'breadcrumbs', 'pagination', 'pager', 'labels', 'badges', 'jumbotron',
+      'thumbnails', 'alerts', 'progress-bars', 'media', 'list-group', 'panels',
+      'responsive-embed', 'wells', 'close',
+      'modals', 'tooltip', 'popovers', 'carousel', 'utilities', 'responsive-utilities'
+    ]
+
+    names.each do |filename|
+      bootstrap += File.read("#{Rails.root.to_s}/css/bootstrap-3.3.4/bootstrap/_#{filename}.scss")
+    end
 
     BOOTSTRAP = bootstrap
-    #should show those element here
-    ELEMENTS = [
-      'body background',
-      'disabled input & button background, input addon background, nav & tabs & pagination link hover background, jumbotron background',
-      'disabled link color, input placeholder color, dropdown header color, navbar inverse & link color',
-      'nav tab link hover color',
-      'link color, primary button background, pagination active background, progress bar background, label background, panel heading color',
-      'text color, legend color, dropdown link color, panel text color, code color',
-      'navbar inverse background'
-    ]
+    VARIABLES = File.read("#{Rails.root.to_s}/css/bootstrap-3.3.4/bootstrap/_variables.scss")
+
+    # bootstrap = ''
+    # names = [
+    #   "mixins", "normalize", "print",
+    #   "scaffolding", "type", "code", "grid", "tables", "forms", "buttons",
+    #   "component-animations", "glyphicons", "dropdowns", "button-groups",
+    #   "input-groups", "navs", "navbar", "breadcrumbs", "pagination", "pager", "labels",
+    #   "badges", "jumbotron", "thumbnails", "alerts", "progress-bars",
+    #   "media", "list-group", "panels", "wells", "close",
+    #   "modals", "tooltip", "popovers", "carousel",
+    #   "utilities", "responsive-utilities"]
+
+    # names.each do |name|
+    #   bootstrap += File.read("#{Rails.root.to_s}/config/less/#{name}.less")
+    # end
+
+    # VARIABLES = File.read("#{Rails.root.to_s}/config/less/variables.less")
+
+    # BOOTSTRAP = bootstrap
   end
 end
