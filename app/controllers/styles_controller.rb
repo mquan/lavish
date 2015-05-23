@@ -39,7 +39,7 @@ class StylesController < ApplicationController
 
     engine = Engines::Bootstrap.new(@colors)
     @variables = engine.variables
-    @less = @css = engine.compile
+    @lavishCSS = engine.compile
   end
 
   def parse_colors

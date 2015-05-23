@@ -15,7 +15,6 @@
 //= require jscolor-1.4.1
 //= require spin-1.3.2
 //= require jquery.spin
-//= require bootstrap-3.0.0
-//= require less-1.4.2
+//= require bootstrap-3.3.4
 //= require FileSaver
 //= require lavish

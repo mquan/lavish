@@ -59,7 +59,7 @@
   <form>
     <div class="col-md-6">
       <h3>CSS</h3>
-      <%=raw text_area_tag :css, '', rows: 15, id: 'css-code', class: 'form-control' %>
+      <%=raw text_area_tag :css, @lavishCSS, rows: 15, id: 'css-code', class: 'form-control' %>
       <a href="#" id="css-download" class="btn btn-lg btn-success btn-download">Download lavish-bootstrap.css</a>
     </div>
     <div class="col-md-6">
@@ -72,7 +72,7 @@
 
 <script type="text/javascript">
   window.lavishVariables = "<%=raw j @variables %>";
-  lavishParse('<%=raw j @less%>');
+  lavishParse('<%=raw j @lavishCSS %>');
 </script>
 <% samples = [
   {img: "http://design-seeds.com/palettes/CreatureTones510.png", url: "http://design-seeds.com/index.php/home/entry/creature-tones1"},
