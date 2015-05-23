@@ -1,6 +1,6 @@
 Lavish::Application.routes.draw do
-  root :to => 'styles#new'
+  root to: 'styles#new'
   resources :styles
-  match '/customize' => 'styles#customize', :as => :customize
-  match '/preview' => "styles#preview", as: :preview
+  post '/customize' => 'styles#customize', as: :customize
+  get '/preview' => "styles#preview", as: :preview
 end
