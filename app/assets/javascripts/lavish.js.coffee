@@ -23,8 +23,8 @@ window.saveFile = (filename, content) ->
 		filename
 	)
 
-window.lavishParse = (raw) ->
-	window.lavishCSS = raw
+window.insertLavish = (raw) ->
+	$('#sass-code').val(lavishVariables)
 	$('#css-code').val(lavishCSS)
 	$('#lavish-style').text(lavishCSS)
 	toggleSpinner(false)
