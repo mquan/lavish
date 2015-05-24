@@ -45,8 +45,8 @@ $(document).ready ->
 
 	$("#variables-download").click (event) ->
 		event.preventDefault()
-		saveFile("variables.scss", lavishVariables)
+		saveFile("variables.scss", $('#sass-code').val())
 
 	$("#css-download").click (event) ->
 		event.preventDefault()
-		saveFile("lavish-bootstrap.css", lavishCSS)
+		saveFile("lavish-bootstrap.css", $('#css-code').val())
