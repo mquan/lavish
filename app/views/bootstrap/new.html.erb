@@ -41,7 +41,7 @@
       <table class='table table-bordered'>
         <% @colors.each_with_index do |color, index| %>
           <tr>
-            <td class="col-md-6"><%= StylesController::ELEMENTS[index]%></td>
+            <td class="col-md-6"><%= BootstrapController::ELEMENTS[index]%></td>
             <td class="col-md-3" style="text-align:center;"><%= render :partial => 'dropdown', :locals => { :colors => @colors, :index => index } %></td>
             <td class="col-md-3" style="text-align:center;"><%= text_field_tag "colors[]", color, class: 'form-control jscolor', data: {index: index } %></td>
           </tr>

@@ -1,8 +1,8 @@
-require "sass"
 require "engines/bootstrap"
 
-class StylesController < ApplicationController
-  # TODO: call this whole thing boostrap_controller
+class BootstrapController < ApplicationController
+  layout "bootstrap"
+
   ELEMENTS = [
     'body background',
     'disabled input & button background, input addon background, nav & tabs & pagination link hover background, jumbotron background',
@@ -18,18 +18,14 @@ class StylesController < ApplicationController
     @colors = Engines::Bootstrap.extract_colors(params[:image_url])
 
     compile
-
-    render "bootstrap", layout: "bootstrap"
-  end
-
-  def customize
-    compile
   end
 
   def preview
     compile
+  end
 
-    render "preview", layout: "bootstrap"
+  def customize
+    compile
   end
 
   private
@@ -43,7 +39,7 @@ class StylesController < ApplicationController
   end
 
   def parse_colors
-    @colors ||= if params[:colors]
+    @colors ||= if params[:colors].present?
       params[:colors].map { |color| color.match(/^#/) ? color : "##{color}" }
     else
       Engines::Bootstrap::DEFAULT_COLORS
