@@ -10,7 +10,7 @@ group :production do
   gem 'pg'
 end
 gem "rmagick", '~> 2.15.0'
-gem "prizm"
+gem "prizm", '~> 0.0.3'
 
 # Gems used only for assets and not required
 # in production environments by default.
